@@ -18,7 +18,7 @@ public class AdmittanceCalculator {
 	static double sbase = 100;
 
 	public static Complex[][] calculateAdmittanceMatrix() throws XmlStructureNotAsAssumedException {
-		normalizeBusbarSections();
+
 		List<BusbarSection> allBusbarSections = RdfLibary.getAllofType(BusbarSection.class);
 		Complex[][] admittanceMatrix = new Complex[allBusbarSections.size()][allBusbarSections.size()];
 
@@ -32,7 +32,9 @@ public class AdmittanceCalculator {
 					if (equipmentBehind instanceof BusbarSection) {
 						int iBus1 = allBusbarSections.indexOf(bus);
 						int iBus2 = allBusbarSections.indexOf(equipmentBehind);
-						System.out.println("Adding value [" + iBus1 + "][" + iBus2 + "]= " + equipmentConnected);
+						if (Config.verbose) {
+							System.out.println("Adding value [" + iBus1 + "][" + iBus2 + "]= " + equipmentConnected);
+						}
 						try {
 
 							Complex admittanz = equipmentConnected.getAdmittanz(sbase);

@@ -16,6 +16,7 @@ public class RdfLink<T extends RdfObject> {
 		this.rdfId = rdfId;
 		this.obj = null;
 		RdfLibary.addToReferenceList(rdfId, parent);
+
 		list.add((RdfLink<RdfObject>) this);
 	}
 
@@ -30,16 +31,16 @@ public class RdfLink<T extends RdfObject> {
 		}
 		return obj;
 	}
-	
+
 	protected static void replaceLink(String oldId, RdfObject newObj) {
 		for (RdfLink<RdfObject> rdfLink : list) {
-			if(rdfLink.rdfId.equals(oldId)){
-				rdfLink.rdfId= newObj.getRdfId();
+			if (rdfLink.rdfId.equals(oldId)) {
+				rdfLink.rdfId = newObj.getRdfId();
 				rdfLink.obj = RdfLibary.getByID(rdfLink.rdfId);
 			}
-			
+
 		}
-		
+
 	}
 
 }

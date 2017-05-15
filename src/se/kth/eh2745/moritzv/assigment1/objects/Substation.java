@@ -17,12 +17,11 @@ public class Substation extends EquipmentContainer {
 
 	protected RdfLink<GeographicalRegion> region;
 
-	public GeographicalRegion getRegion() {
-		return region.getObj();
-	}
+	@SuppressWarnings("unchecked")
+	public Substation(Element element) throws XmlStructureNotAsAssumedException {
+		super(element);
+		this.region = (RdfLink<GeographicalRegion>) XmlParser.ParseRdfLink(element, "cim:Substation.Region", this);
 
-	public String getRegionRdfId() {
-		return region.getRdfId();
 	}
 
 	public static String getCimName() {
@@ -34,7 +33,6 @@ public class Substation extends EquipmentContainer {
 		return true;
 	}
 
-
 	public static ArrayList<MysqlField> getTabelFields() {
 
 		ArrayList<MysqlField> list = EquipmentContainer.getTabelFields();
@@ -43,12 +41,13 @@ public class Substation extends EquipmentContainer {
 
 	}
 
+	@Override
 	public int insertData(PreparedStatement statment) throws SQLException {
 		int index = super.insertData(statment);
 		statment.setString(++index, getRegionRdfId());
 		return index;
 	}
-	
+
 	@Override
 	public RdfObject[] getLinks() {
 		RdfObject[] objs = { getRegion() };
@@ -75,11 +74,12 @@ public class Substation extends EquipmentContainer {
 		return busbarSectionsAtSub;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Substation(Element element) throws XmlStructureNotAsAssumedException {
-		super(element);
-		this.region = (RdfLink<GeographicalRegion>) XmlParser.ParseRdfLink(element, "cim:Substation.Region", this);
+	public GeographicalRegion getRegion() {
+		return region.getObj();
+	}
 
+	public String getRegionRdfId() {
+		return region.getRdfId();
 	}
 
 }

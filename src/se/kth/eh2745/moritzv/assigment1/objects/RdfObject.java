@@ -17,8 +17,6 @@ public abstract class RdfObject implements Comparable<RdfObject> {
 
 	protected String rdfId;
 
-	protected static String cimTag;
-
 	public RdfObject(Element element) throws XmlStructureNotAsAssumedException {
 		this.rdfId = XmlParser.ParseRdfID(element);
 		RdfLibary.addToList(this);
@@ -36,10 +34,6 @@ public abstract class RdfObject implements Comparable<RdfObject> {
 																// updated
 			throw new XmlStructureNotAsAssumedException(this.toString());
 		}
-	}
-
-	public static String getCimTag() {
-		return cimTag;
 	}
 
 	public static String getCimName() throws NoCimNamException {

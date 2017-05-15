@@ -87,7 +87,7 @@ public class MainWindow extends JPanel implements ActionListener {
 		c.gridwidth = 2;
 		add(admittanceScrollPane, c);
 
-		fc = new JFileChooser();
+		fc = new JFileChooser(new File("").getAbsoluteFile());
 
 		eqButton = new JButton("Load EQ-File");
 		eqButton.addActionListener(this);

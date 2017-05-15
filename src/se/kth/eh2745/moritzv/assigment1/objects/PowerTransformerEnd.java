@@ -25,7 +25,6 @@ public class PowerTransformerEnd extends IdentifiedObject {
 		this.transformerX = XmlParser.ParseDoubleNodeContent(element, "cim:PowerTransformerEnd.x");
 		this.transformer = (RdfLink<RdfObject>) XmlParser.ParseRdfLink(element,
 				"cim:PowerTransformerEnd.PowerTransformer", this);
-
 	}
 
 	public static String getCimName() {

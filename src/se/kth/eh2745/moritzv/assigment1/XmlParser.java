@@ -42,8 +42,10 @@ public class XmlParser {
 
 		for (RdfObjectClasses classEnum : RdfObjectClasses.values()) {
 			if (updateTree) {
+				// SSH File
 				status += updateObjectsForClass(doc, classEnum.getClassvar());
 			} else {
+				// EQ File
 				status += createObjectsForClass(doc, classEnum.getClassvar());
 			}
 		}
@@ -106,6 +108,8 @@ public class XmlParser {
 			for (int i = 0; i < list.getLength(); i++) {
 				@SuppressWarnings("rawtypes")
 				Class[] cArg = { Element.class };
+
+				// Call constructor
 				Constructor<? extends RdfObject> con = cl.getConstructor(cArg);
 				RdfObject obj = con.newInstance((Element) list.item(i));
 
@@ -130,6 +134,7 @@ public class XmlParser {
 
 	private static NodeList getNodesForClass(Document doc, Class<? extends RdfObject> cl)
 			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		// Call Class.getCimName()
 		Method method = cl.getMethod("getCimName", (Class<?>[]) null);
 		String cimName = (String) method.invoke((Object) null, (Object[]) null);
 
