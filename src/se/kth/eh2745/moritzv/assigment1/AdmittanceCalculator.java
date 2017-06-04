@@ -38,6 +38,7 @@ public class AdmittanceCalculator {
 						try {
 
 							Complex admittanz = equipmentConnected.getAdmittanz(sbase);
+							Complex shunt = equipmentConnected.getShunt(sbase);
 							if (admittanceMatrix[iBus1][iBus2] == null) {
 								admittanceMatrix[iBus1][iBus2] = admittanz.neg();
 							} else {
@@ -45,9 +46,10 @@ public class AdmittanceCalculator {
 							}
 
 							if (admittanceMatrix[iBus1][iBus1] == null) {
-								admittanceMatrix[iBus1][iBus1] = admittanz;
+								admittanceMatrix[iBus1][iBus1] = admittanz.add(shunt);
 							} else {
-								admittanceMatrix[iBus1][iBus1] = admittanceMatrix[iBus1][iBus1].add(admittanz);
+								admittanceMatrix[iBus1][iBus1] = admittanceMatrix[iBus1][iBus1].add(admittanz)
+										.add(shunt);
 							}
 
 						} catch (VoltageLevelNotFoundException e) {

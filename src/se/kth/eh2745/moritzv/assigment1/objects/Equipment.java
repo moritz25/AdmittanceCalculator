@@ -51,6 +51,10 @@ public abstract class Equipment extends IdentifiedObject {
 		return new Complex(0);
 	}
 
+	public Complex getShunt(double sbase) throws VoltageLevelNotFoundException {
+		return new Complex(0);
+	}
+
 	public Collection<Terminal> getTerminals() {
 		Collection<Terminal> allTerminals = RdfLibary.getAllofType(Terminal.class);
 		Collection<Terminal> terminalsAtThis = new ArrayList<Terminal>();

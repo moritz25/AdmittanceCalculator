@@ -14,6 +14,8 @@ import se.kth.eh2745.moritzv.assigment1.exception.XmlStructureNotAsAssumedExcept
 public class PowerTransformerEnd extends IdentifiedObject {
 	protected double transformerR;
 	protected double transformerX;
+	protected double b;
+	protected double g;
 
 	protected RdfLink<RdfObject> transformer;
 
@@ -23,6 +25,8 @@ public class PowerTransformerEnd extends IdentifiedObject {
 
 		this.transformerR = XmlParser.ParseDoubleNodeContent(element, "cim:PowerTransformerEnd.r");
 		this.transformerX = XmlParser.ParseDoubleNodeContent(element, "cim:PowerTransformerEnd.x");
+		this.b = XmlParser.ParseDoubleNodeContent(element, "cim:PowerTransformerEnd.b");
+		this.g = XmlParser.ParseDoubleNodeContent(element, "cim:PowerTransformerEnd.g");
 		this.transformer = (RdfLink<RdfObject>) XmlParser.ParseRdfLink(element,
 				"cim:PowerTransformerEnd.PowerTransformer", this);
 	}
@@ -59,6 +63,14 @@ public class PowerTransformerEnd extends IdentifiedObject {
 
 	public double getTransformerX() {
 		return transformerX;
+	}
+
+	public double getB() {
+		return b;
+	}
+
+	public double getG() {
+		return g;
 	}
 
 	public RdfObject getTransformer() {

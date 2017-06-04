@@ -40,6 +40,18 @@ public class PowerTransformer extends Equipment {
 
 	}
 
+	@Override
+	public Complex getShunt(double sBase) throws VoltageLevelNotFoundException {
+		for (PowerTransformerEnd pte : getPowerTransformerEnds()) {
+			if (pte.getTransformerR() != 0) {
+				return new Complex(pte.getG() / 2.0 * getZBase(sBase), pte.getB() / 2.0 * getZBase(sBase));
+			}
+
+		}
+		return null;
+
+	}
+
 	public Collection<PowerTransformerEnd> getPowerTransformerEnds() {
 		Collection<PowerTransformerEnd> allPowerTransformerEnd = RdfLibary.getAllofType(PowerTransformerEnd.class);
 		Collection<PowerTransformerEnd> powerTransformerEndHere = new ArrayList<PowerTransformerEnd>();
